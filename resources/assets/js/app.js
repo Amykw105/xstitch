@@ -14,9 +14,16 @@ require('./bootstrap');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+import passportclient from './components/passport/Clients.vue';
+import passportauthorizedclients from './components/passport/AuthorizedClients.vue';
+import passportpersonalaccesstokens from './components/passport/PersonalAccessTokens.vue';
 
 const app = new Vue({
     el: '#app',
-
+    components: {
+      passportclient,
+      passportauthorizedclients,
+      passportpersonalaccesstokens,
+    },
     methods: {}
 });
