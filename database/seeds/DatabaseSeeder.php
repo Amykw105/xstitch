@@ -49,6 +49,20 @@ class DatabaseSeeder extends Seeder
            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
        ]);
+       DB::table('statuses')->insert([
+           'project_id' => $faker->numberBetween($min = 1, $max = 10),
+           'description' => $faker->sentence($nbWords = 6, $variableNbWords = true),
+           'image' => $faker->imageUrl(200, 200, 'cats'),
+           'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+           'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+       ]);
+       DB::table('statuses')->insert([
+           'project_id' => $faker->numberBetween($min = 1, $max = 10),
+           'description' => $faker->sentence($nbWords = 6, $variableNbWords = true),
+           'image' => $faker->imageUrl(200, 200, 'cats'),
+           'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+           'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+       ]);
       }
      }
 }

@@ -15,12 +15,14 @@ require('./bootstrap');
 
  import listprojects from './components/projects/list_projects.vue';
  import profileinfo from './components/profiles/profile_info.vue';
+ import liststatuses from './components/projects/list_statuses.vue';
 
 const app = new Vue({
     el: '#app',
 
     components: {
       listprojects,
-      profileinfo
+      profileinfo,
+      liststatuses
     }
 });

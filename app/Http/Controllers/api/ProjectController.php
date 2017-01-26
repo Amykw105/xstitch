@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Project;
+use App\User;
+use App\Status;
 use App\Http\Requests;
 use Validator;
 use Response;
@@ -24,6 +26,16 @@ class ProjectController extends Controller
         'data' => $items
       ];
       return response()->json($response);
+    }
+
+    public function getProject($user,$project){
+      $getUser = User::where('slug', $user)->first();
+      $project = Project::where('slug', $project)->where('user_id', $getUser->id)->first();
+      $statuses = Status::where('project_id', $project->id)->get();
+      return response()->json([
+          'projects'=>$project,
+          'statuses' => $statuses
+      ]);
     }
 
     /**

@@ -27,4 +27,5 @@ Route::group(['middleware' => ['auth']], function() {
   Route::get('/vuejscrud', 'web\ProjectController@vueCrud');
   Route::resource('/vueitems','web\ProjectController');
   Route::get('/profile/{slug}', 'web\ProfilesController@viewProfile');
+  Route::get('/profile/{slug}/{project}', 'web\ProjectController@index');
 });
