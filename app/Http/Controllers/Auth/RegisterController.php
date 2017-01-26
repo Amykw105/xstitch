@@ -62,10 +62,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+      $avatarLocation = 'images/profiles/default/';
+      $avatarArray = array('blue','red','yellow','green','purple');
+      shuffle($avatarArray);
+      $avatar = $avatarArray[0];
+      $fileUrl = $avatarLocation . $avatar . '.jpg';
+      return $user = User::create([
+          'name' => $data['name'],
+          'email' => $data['email'],
+          'password' => bcrypt($data['password']),
+          'slug' => str_slug($data['name']),
+          'avatar' => $fileUrl
+      ]);
     }
 }

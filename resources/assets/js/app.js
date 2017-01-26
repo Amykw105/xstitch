@@ -13,10 +13,12 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+import listprojects from './components/projects/list_projects.vue';
 
 const app = new Vue({
     el: '#app',
 
-    methods: {}
+    components: {
+      listprojects,
+    }
 });
