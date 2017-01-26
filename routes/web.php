@@ -18,7 +18,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+// Not logged in to see
 Route::group(['middleware' => ['web']], function() {
-  Route::get('/vuejscrud', 'ProjectController@vueCrud');
-  Route::resource('/vueitems','ProjectController');
+
+});
+// Must be logged in to see
+Route::group(['middleware' => ['auth']], function() {
+  Route::get('/vuejscrud', 'web\ProjectController@vueCrud');
+  Route::resource('/vueitems','web\ProjectController');
+  Route::get('/profile/{slug}', 'web\ProfilesController@viewProfile');
 });

@@ -22,4 +22,4 @@ Route::get('/{user}/followees', 'api\ProfilesController@getFollowees');
 Route::get('/{user}/followers', 'api\ProfilesController@getFollowers');
 Route::get('/{user}/actions', 'api\ProfilesController@profileActions');
 Route::get('/{user}/projects_list', 'api\ProfilesController@getProjects');
-Route::get('/{user}/{project}', 'api\ProjectsController@getProject');
+Route::get('/{user}/{project}', 'api\ProjectController@getProject');

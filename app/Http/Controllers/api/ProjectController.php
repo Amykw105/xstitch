@@ -12,9 +12,6 @@ use Illuminate\Support\Facades\Input;
 class ProjectController extends Controller
 {
 
-    public function vueCrud(){
-      return view('/vuejscrud/index');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -63,18 +60,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return Project::findOrFail($id);
     }
 
     /**

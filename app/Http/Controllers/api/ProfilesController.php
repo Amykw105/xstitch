@@ -43,7 +43,7 @@ class ProfilesController extends Controller
     }
     public function getInfo($user){
       $getUser = User::where('slug', $user)->first();
-      $userAdv = $getUser->profile()->get()->toArray();
+      $userAdv = $getUser->profile()->get()->first();
       return response()->json([
           'userbasics'=>$getUser,
           'user'=>$userAdv
