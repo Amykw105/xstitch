@@ -51,8 +51,8 @@ export default {
                 })
                 .catch(
                     (response) => {
-                        console.log('error');
-                        console.log(response.data);
+                        //console.log('error');
+                        //console.log(response.data);
                     }
                 );
         }

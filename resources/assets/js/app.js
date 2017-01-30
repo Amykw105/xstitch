@@ -12,6 +12,7 @@ require('./bootstrap');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
  import listprojects from './components/projects/list_projects.vue';
  import profileinfo from './components/profiles/profile_info.vue';

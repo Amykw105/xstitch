@@ -14,9 +14,17 @@ use Illuminate\Support\Facades\Input;
 class ProjectController extends Controller
 {
 
-    public function index($slug, $project){
+    public function index($slug){
       $user = User::where('slug', $slug)->first();
-      $project = Project::where('slug', $project)->where('user_id', $user->id)->first();
-      return view('/project.index', compact('user', 'project'));
+      // $project = Project::where('slug', $project)->where('user_id', $user->id)->first();
+      return view('/profile.index', compact('user'));
     }
+
+    // public function index($slug, $project){
+    //   $user = User::where('slug', $slug)->first();
+    //   $project = Project::where('slug', $project)->where('user_id', $user->id)->first();
+    //   return view('/project.index', compact('user', 'project'));
+    // }
+
+
 }

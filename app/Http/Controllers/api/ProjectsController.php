@@ -11,27 +11,22 @@ use App\Http\Requests;
 use Validator;
 use Response;
 use Illuminate\Support\Facades\Input;
-class ProjectController extends Controller
+class ProjectsController extends Controller
 {
 
-    public function index(){
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
       $items = Project::all();
       $response = [
         'data' => $items
       ];
       return response()->json($response);
     }
-
-    public function getProject($user,$project){
-      $getUser = User::where('slug', $user)->first();
-      $project = Project::where('slug', $project)->where('user_id', $getUser->id)->first();
-      $statuses = Status::where('project_id', $project->id)->get();
-      return response()->json([
-          'projects'=>$project,
-          'statuses' => $statuses
-      ]);
-    }
-
 
     /**
      * Store a newly created resource in storage.
@@ -41,11 +36,8 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-      $this->validate($request,[
-      'name' => 'required',
-      'description' => 'required',
-      ]);
       $create = Project::create($request->all());
+
       return response()->json($create);
     }
 
@@ -69,12 +61,8 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $this->validate($request,[
-      'name' => 'required',
-      'description' => 'required',
-      ]);
-      $edit = Project::find($id)->update($request->all());
-      return response()->json($edit);
+      $edit = Project::findOrFail($id);
+      $edit->update($request->all());
     }
 
     /**
@@ -85,7 +73,7 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-      Project::find($id)->delete();
-      return response()->json(['done']);
+      $del = Project::findOrFail($id);
+      $del->delete();
     }
 }
