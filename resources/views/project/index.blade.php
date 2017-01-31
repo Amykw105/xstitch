@@ -1,7 +1,17 @@
 @extends('layouts.app')
+
 @section('content')
 <div class="container">
-  <profileinfo userslug="{{$user->slug}}"></profileinfo>
-  <liststatuses userslug="{{$user->slug}}" projectslug="{{$project->slug}}"></liststatuses>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Dashboard</div>
+
+                <div class="panel-body">
+                    <projects userslug="{{ Auth::user()->id }}"></projects>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-@stop
+@endsection

@@ -34,8 +34,7 @@ class ProjectsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
       $create = Project::create($request->all());
 
       return response()->json($create);
@@ -61,8 +60,9 @@ class ProjectsController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $edit = Project::findOrFail($id);
-      $edit->update($request->all());
+       $edit = Project::where('id', $id)->first();
+       $edit->update($request->all());
+       return response()->json($request);
     }
 
     /**

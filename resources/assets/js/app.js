@@ -7,23 +7,23 @@
 
 require('./bootstrap');
 
+var Vue = require('vue');
+Vue.use(require('vue-resource'));
+/**
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+// axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
- import listprojects from './components/projects/list_projects.vue';
- import profileinfo from './components/profiles/profile_info.vue';
- import liststatuses from './components/projects/list_statuses.vue';
+ import projects from './components/projects.vue';
 
 const app = new Vue({
     el: '#app',
 
     components: {
-      listprojects,
-      profileinfo,
-      liststatuses
+      projects
     }
 });
