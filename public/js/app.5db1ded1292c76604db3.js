@@ -19762,6 +19762,8 @@ module.exports = g;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_projects_vue__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_projects_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_projects_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_projectinfo_vue__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_projectinfo_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_projectinfo_vue__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -19784,11 +19786,13 @@ Vue.use(__webpack_require__(37));
 
 
 
+
 var app = new Vue({
   el: '#app',
 
   components: {
-    projects: __WEBPACK_IMPORTED_MODULE_0__components_projects_vue___default.a
+    projects: __WEBPACK_IMPORTED_MODULE_0__components_projects_vue___default.a,
+    projectinfo: __WEBPACK_IMPORTED_MODULE_1__components_projectinfo_vue___default.a
   }
 });
 
@@ -42293,6 +42297,482 @@ module.exports = function(module) {
 __webpack_require__(11);
 module.exports = __webpack_require__(12);
 
+
+/***/ }),
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = {
+    props: {
+        userslug: '',
+        projectslug: '',
+        projectid: ''
+    },
+    data: function data() {
+        return {
+            statuses: [],
+            errors: [],
+            newStatus: {
+                project_id: this.projectid,
+                description: '',
+                image: 'google.com'
+            },
+            editStatus: {
+                id: '',
+                description: '',
+                image: ''
+            }
+        };
+    },
+    created: function created() {
+        this.fetchStatuses();
+    },
+
+    methods: {
+        fetchStatuses: function fetchStatuses() {
+            var _this = this;
+
+            // Get all statuses for the listing
+            axios.get('/api/' + this.userslug + '/' + this.projectslug + '/statuses').then(function (response) {
+                _this.statuses = response.data.data;
+            });
+        },
+        createStatus: function createStatus() {
+            var _this2 = this;
+
+            axios.post('/api/' + this.userslug + '/' + this.projectslug + '/statuses', this.newStatus).then(function (response) {
+                console.log(response.data);
+                _this2.fetchStatuses();
+            }, function (response) {
+                _this2.formErrors = response.data;
+            });
+            this.newStatus = { 'description': '' };
+            $("#newStatusModal").modal("hide");
+        },
+        fetchStatus: function fetchStatus(status) {
+            var _this3 = this;
+
+            // Get individual status for editing
+            axios.get('/api/' + this.userslug + '/' + this.projectslug + '/statuses/' + status.id).then(function (response) {
+                _this3.editStatus.description = response.data.data[0].description;
+                _this3.editStatus.id = response.data.data[0].id;
+                _this3.editStatus.image = response.data.data[0].image;
+                $("#updateStatusModal").modal("show");
+            }, function (response) {
+                _this3.formErrors = response.data;
+            });
+        },
+        updateStatus: function updateStatus(editStatus) {
+            var _this4 = this;
+
+            axios.patch('/api/' + this.userslug + '/' + this.projectslug + '/statuses/' + this.editStatus.id, this.editStatus).then(function (response) {
+                console.log(response);
+                _this4.fetchStatuses();
+            }, function (response) {
+                console.log('fail');
+            });
+            $("#updateStatusModal").modal("hide");
+        },
+        deleteStatus: function deleteStatus(status) {
+            var _this5 = this;
+
+            axios.delete('/api/' + this.userslug + '/' + this.projectslug + '/statuses/' + status.id).then(function (response) {
+                var index = _this5.statuses.indexOf(status);
+                _this5.statuses.splice(index, 1);
+                _this5.fetchStatuses();
+            });
+        }
+    } // end methods
+};
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = {}
+
+/* script */
+__vue_exports__ = __webpack_require__(48)
+
+/* template */
+var __vue_template__ = __webpack_require__(50)
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "/Users/premiermac3/Code/xstitch/resources/assets/js/components/projectinfo.vue"
+if(typeof __vue_options__.name === "undefined") {
+  __vue_options__.name = "projectinfo"
+}__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-24660a13", __vue_options__)
+  } else {
+    hotAPI.reload("data-v-24660a13", __vue_options__)
+  }
+})()}
+if (__vue_options__.functional && typeof __vue_template__ !== "undefined") {console.error("[vue-loader] projectinfo.vue: functional components are not supported with templates, they should use render functions.")}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('div', {
+    staticClass: "modal fade",
+    attrs: {
+      "tabindex": "-1",
+      "role": "dialog",
+      "id": "newStatusModal"
+    }
+  }, [_c('div', {
+    staticClass: "modal-dialog",
+    attrs: {
+      "role": "document"
+    }
+  }, [_c('div', {
+    staticClass: "modal-content"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "modal-body"
+  }, [_c('form', {
+    attrs: {
+      "method": "post"
+    },
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.createStatus($event)
+      }
+    }
+  }, [_c('div', {
+    class: {
+      'form-group': true, 'has-error': _vm.errors.description
+    }
+  }, [_c('label', [_vm._v("Status Description:")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newStatus.description),
+      expression: "newStatus.description"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": _vm._s(_vm.newStatus.description)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newStatus.description = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _vm._l((_vm.errors.description), function(error) {
+    return _c('span', {
+      staticClass: "help-block"
+    }, [_vm._v(_vm._s(error))])
+  })], 2), _vm._v(" "), _vm._m(1)])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "modal fade",
+    attrs: {
+      "tabindex": "-1",
+      "role": "dialog",
+      "id": "updateStatusModal"
+    }
+  }, [_c('div', {
+    staticClass: "modal-dialog",
+    attrs: {
+      "role": "document"
+    }
+  }, [_c('div', {
+    staticClass: "modal-content"
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
+    staticClass: "modal-body"
+  }, [_c('form', {
+    attrs: {
+      "method": "post"
+    },
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.updateStatus($event)
+      }
+    }
+  }, [_c('input', {
+    attrs: {
+      "type": "hidden",
+      "name": "_method",
+      "value": "PATCH"
+    }
+  }), _vm._v(" "), _c('div', {
+    class: {
+      'form-group': true, 'has-error': _vm.errors.description
+    }
+  }, [_c('label', [_vm._v("Status Description:")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editStatus.description),
+      expression: "editStatus.description"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": _vm._s(_vm.editStatus.description)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editStatus.description = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _vm._l((_vm.errors.description), function(error) {
+    return _c('span', {
+      staticClass: "help-block"
+    }, [_vm._v(_vm._s(error))])
+  })], 2), _vm._v(" "), _vm._m(3)])])])])]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "button",
+      "data-toggle": "modal",
+      "data-target": "#newStatusModal"
+    }
+  }, [_vm._v("New Status")]), _vm._v(" "), _c('table', {
+    staticClass: "table table-striped"
+  }, [_vm._m(4), _vm._v(" "), _c('tbody', _vm._l((_vm.statuses), function(status) {
+    return _c('tr', {
+      attrs: {
+        "user": status
+      },
+      on: {
+        "update-user": _vm.fetchStatuses
+      }
+    }, [_c('td', {
+      staticStyle: {
+        "color": "black"
+      }
+    }, [_vm._v(_vm._s(status.image))]), _vm._v(" "), _c('td', {
+      staticStyle: {
+        "color": "black"
+      }
+    }, [_vm._v(_vm._s(status.description))]), _vm._v(" "), _c('td', {
+      staticStyle: {
+        "color": "black"
+      }
+    }, [_vm._v(_vm._s(status.created_at))]), _vm._v(" "), _c('td', [_c('button', {
+      staticClass: "btn btn-warning",
+      attrs: {
+        "type": "button"
+      },
+      on: {
+        "click": function($event) {
+          _vm.fetchStatus(status)
+        }
+      }
+    }, [_vm._v("\n                  Edit\n                ")]), _vm._v(" "), _c('button', {
+      staticClass: "btn btn-danger",
+      attrs: {
+        "type": "button"
+      },
+      on: {
+        "click": function($event) {
+          _vm.deleteStatus(status)
+        }
+      }
+    }, [_vm._v("\n                  Delete\n                ")])])])
+  }))])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-header"
+  }, [_c('button', {
+    staticClass: "close",
+    attrs: {
+      "type": "button",
+      "data-dismiss": "modal",
+      "aria-label": "Close"
+    }
+  }, [_c('span', {
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', {
+    staticClass: "modal-title"
+  }, [_vm._v("Add a new status")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-group"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "submit"
+    }
+  }, [_vm._v("Save New Status")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-danger",
+    attrs: {
+      "type": "button",
+      "data-dismiss": "modal"
+    }
+  }, [_vm._v("Cancel")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-header"
+  }, [_c('button', {
+    staticClass: "close",
+    attrs: {
+      "type": "button",
+      "data-dismiss": "modal",
+      "aria-label": "Close"
+    }
+  }, [_c('span', {
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', {
+    staticClass: "modal-title"
+  }, [_vm._v("Add a new status")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-group"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "submit"
+    }
+  }, [_vm._v("Save New Status")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-danger",
+    attrs: {
+      "type": "button",
+      "data-dismiss": "modal"
+    }
+  }, [_vm._v("Cancel")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('tr', [_c('th', [_vm._v("image")]), _vm._v(" "), _c('th', [_vm._v("Description")]), _vm._v(" "), _c('th', [_vm._v("Posted")]), _vm._v(" "), _c('th', [_vm._v("Actions")])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-24660a13", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

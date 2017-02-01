@@ -19,13 +19,15 @@ class ProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-      $items = Project::all();
-      $response = [
-        'data' => $items
-      ];
-      return view('project.index', compact('items'));
+    public function index(){
+      return view('project.index');
+    }
+
+    public function show($user, $project){
+      $userid = User::where('slug', $user)->first();
+      $projectslug = $project;
+      $projectid = Project::where('slug', $project)->where('user_id', $userid['id'])->first();
+      return view('project.show', compact('projectslug', 'projectid'));
     }
 
 }
