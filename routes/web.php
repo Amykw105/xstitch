@@ -24,5 +24,5 @@ Route::group(['middleware' => ['web']], function() {
 });
 // Must be logged in to see
 Route::group(['middleware' => ['auth']], function() {
-  Route::get('/projects', 'web\ProjectsController@index');
+  Route::get('/my-projects', 'web\ProjectsController@index');
 });

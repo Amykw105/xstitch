@@ -8,7 +8,7 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    <projects userslug="{{ Auth::user()->id }}"></projects>
+                    <projects userid="{{ Auth::user()->id }}" userslug="{{ Auth::user()->slug }}"></projects>
                 </div>
             </div>
         </div>

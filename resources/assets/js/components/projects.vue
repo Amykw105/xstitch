@@ -84,7 +84,10 @@
                 <td>{{project.name}}</td>
                 <td>{{project.description}}</td>
                 <td>
-                  <button type="button" class="btn btn-info" v-on:click="fetchProject(project)">
+                  <a :href="'/' + userslug + '/' + project.slug" class="btn btn-info">
+                    View
+                  </a>
+                  <button type="button" class="btn btn-warning" v-on:click="fetchProject(project)">
                     Edit
                   </button>
                   <button type="button" class="btn btn-danger" v-on:click="deleteProject(project)">
@@ -103,7 +106,8 @@ export default {
       userslug: {
             type: String,
             default: "",
-        }
+        },
+        userid: ''
     },
     data(){
         return {
@@ -111,14 +115,14 @@ export default {
             errors: [],
             newProject:{
               name: '',
-              user_id: this.userslug,
+              user_id: this.userid,
               description: '',
               source: '',
               slug: '',
             },
             editProject:{
               id: '',
-              owner_id: this.userslug,
+              owner_id: this.userid,
               description: '',
               source: '',
               name: '',
@@ -137,12 +141,12 @@ export default {
     },
     methods: {
         fetchProjects(){ // Get all projects for the listing
-          axios.get('/api/projects').then(response => {
+          axios.get('/api/' + this.userslug + '/projects').then(response => {
               this.projects = response.data.data;
           });
         },
         fetchProject(project) { // Get individual project for editing
-          axios.get('/api/projects/' + project.id).then(response => {
+          axios.get('/api/' + this.userslug + '/projects/' + project.id).then(response => {
             this.editProject.description = response.data.description;
             this.editProject.source = response.data.source;
             this.editProject.id = response.data.id;
@@ -156,17 +160,18 @@ export default {
     		},
         createProject(){
             this.newProject.slug = this.slug;
-            axios.post('/api/projects', this.newProject).then(response => {
+            axios.post('/api/' + this.userslug + '/projects', this.newProject).then(response => {
                 console.log(response.data);
+                this.fetchProjects();
             }, response => {
                 this.formErrors = response.data;
             });
             this.newProject = {'name':'','description':'','source':''};
             $("#newProjectModal").modal("hide");
-            this.fetchProjects();
+
         },
         updateProject(editProject){
-            axios.patch('/api/projects/' + this.editProject.id, this.editProject).then(response => {
+            axios.patch('/api/' + this.userslug + '/projects/' + this.editProject.id, this.editProject).then(response => {
                 console.log('success');
                 this.fetchProjects();
             }, response => {
@@ -176,7 +181,7 @@ export default {
 
         },
         deleteProject(project){
-              axios.delete('/api/projects/' + project.id).then(response => {
+              axios.delete('/api/' + this.userslug + '/projects/' + project.id).then(response => {
                    let index = this.projects.indexOf(project);
                    this.projects.splice(index, 1);
                   this.fetchProjects();

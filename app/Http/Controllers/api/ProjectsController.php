@@ -19,9 +19,10 @@ class ProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($user)
     {
-      $items = Project::all();
+      $id = User::where('slug', $user)->first();
+      $items = Project::where('user_id', $id['id'])->get();
       $response = [
         'data' => $items
       ];
@@ -46,9 +47,21 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        return Project::findOrFail($id);
+    public function show($user, $id){
+        $project = Project::where('id', $id)->first();
+        return response()->json($project);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function projectInfo($user, $slug){
+        $userid = User::where('slug', $user)->first();
+        $project = Project::where('slug', $slug)->where('user_id', $userid['id'])->first();
+        return response()->json($project);
     }
 
     /**
@@ -58,7 +71,7 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $user, $id)
     {
        $edit = Project::where('id', $id)->first();
        $edit->update($request->all());
@@ -71,7 +84,7 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($user, $id)
     {
       $del = Project::findOrFail($id);
       $del->delete();

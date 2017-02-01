@@ -376,107 +376,6 @@ module.exports = {
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(28);
-
-var PROTECTION_PREFIX = /^\)\]\}',?\n/;
-var DEFAULT_CONTENT_TYPE = {
-  'Content-Type': 'application/x-www-form-urlencoded'
-};
-
-function setContentTypeIfUnset(headers, value) {
-  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-    headers['Content-Type'] = value;
-  }
-}
-
-function getDefaultAdapter() {
-  var adapter;
-  if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
-    adapter = __webpack_require__(4);
-  } else if (typeof process !== 'undefined') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(4);
-  }
-  return adapter;
-}
-
-var defaults = {
-  adapter: getDefaultAdapter(),
-
-  transformRequest: [function transformRequest(data, headers) {
-    normalizeHeaderName(headers, 'Content-Type');
-    if (utils.isFormData(data) ||
-      utils.isArrayBuffer(data) ||
-      utils.isStream(data) ||
-      utils.isFile(data) ||
-      utils.isBlob(data)
-    ) {
-      return data;
-    }
-    if (utils.isArrayBufferView(data)) {
-      return data.buffer;
-    }
-    if (utils.isURLSearchParams(data)) {
-      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
-      return data.toString();
-    }
-    if (utils.isObject(data)) {
-      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-      return JSON.stringify(data);
-    }
-    return data;
-  }],
-
-  transformResponse: [function transformResponse(data) {
-    /*eslint no-param-reassign:0*/
-    if (typeof data === 'string') {
-      data = data.replace(PROTECTION_PREFIX, '');
-      try {
-        data = JSON.parse(data);
-      } catch (e) { /* Ignore */ }
-    }
-    return data;
-  }],
-
-  timeout: 0,
-
-  xsrfCookieName: 'XSRF-TOKEN',
-  xsrfHeaderName: 'X-XSRF-TOKEN',
-
-  maxContentLength: -1,
-
-  validateStatus: function validateStatus(status) {
-    return status >= 200 && status < 300;
-  }
-};
-
-defaults.headers = {
-  common: {
-    'Accept': 'application/json, text/plain, */*'
-  }
-};
-
-utils.forEach(['delete', 'get', 'head'], function forEachMehtodNoData(method) {
-  defaults.headers[method] = {};
-});
-
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
-});
-
-module.exports = defaults;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * jQuery JavaScript Library v3.1.1
  * https://jquery.com/
@@ -10701,6 +10600,107 @@ return jQuery;
 
 
 /***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(0);
+var normalizeHeaderName = __webpack_require__(28);
+
+var PROTECTION_PREFIX = /^\)\]\}',?\n/;
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(4);
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(4);
+  }
+  return adapter;
+}
+
+var defaults = {
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      data = data.replace(PROTECTION_PREFIX, '');
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMehtodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
 /* 3 */
 /***/ (function(module, exports) {
 
@@ -19814,7 +19814,7 @@ module.exports = __webpack_require__(14);
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(8);
 var Axios = __webpack_require__(16);
-var defaults = __webpack_require__(1);
+var defaults = __webpack_require__(2);
 
 /**
  * Create an instance of Axios
@@ -19934,7 +19934,7 @@ module.exports = CancelToken;
 "use strict";
 
 
-var defaults = __webpack_require__(1);
+var defaults = __webpack_require__(2);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(17);
 var dispatchRequest = __webpack_require__(18);
@@ -20088,7 +20088,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(21);
 var isCancel = __webpack_require__(6);
-var defaults = __webpack_require__(1);
+var defaults = __webpack_require__(2);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -20744,13 +20744,17 @@ module.exports = function spread(callback) {
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
     props: {
         userslug: {
             type: String,
             default: ""
-        }
+        },
+        userid: ''
     },
     data: function data() {
         return {
@@ -20758,14 +20762,14 @@ module.exports = function spread(callback) {
             errors: [],
             newProject: {
                 name: '',
-                user_id: this.userslug,
+                user_id: this.userid,
                 description: '',
                 source: '',
                 slug: ''
             },
             editProject: {
                 id: '',
-                owner_id: this.userslug,
+                owner_id: this.userid,
                 description: '',
                 source: '',
                 name: '',
@@ -20788,7 +20792,7 @@ module.exports = function spread(callback) {
             var _this = this;
 
             // Get all projects for the listing
-            axios.get('/api/projects').then(function (response) {
+            axios.get('/api/' + this.userslug + '/projects').then(function (response) {
                 _this.projects = response.data.data;
             });
         },
@@ -20796,7 +20800,7 @@ module.exports = function spread(callback) {
             var _this2 = this;
 
             // Get individual project for editing
-            axios.get('/api/projects/' + project.id).then(function (response) {
+            axios.get('/api/' + this.userslug + '/projects/' + project.id).then(function (response) {
                 _this2.editProject.description = response.data.description;
                 _this2.editProject.source = response.data.source;
                 _this2.editProject.id = response.data.id;
@@ -20812,19 +20816,19 @@ module.exports = function spread(callback) {
             var _this3 = this;
 
             this.newProject.slug = this.slug;
-            axios.post('/api/projects', this.newProject).then(function (response) {
+            axios.post('/api/' + this.userslug + '/projects', this.newProject).then(function (response) {
                 console.log(response.data);
+                _this3.fetchProjects();
             }, function (response) {
                 _this3.formErrors = response.data;
             });
             this.newProject = { 'name': '', 'description': '', 'source': '' };
             $("#newProjectModal").modal("hide");
-            this.fetchProjects();
         },
         updateProject: function updateProject(editProject) {
             var _this4 = this;
 
-            axios.patch('/api/projects/' + this.editProject.id, this.editProject).then(function (response) {
+            axios.patch('/api/' + this.userslug + '/projects/' + this.editProject.id, this.editProject).then(function (response) {
                 console.log('success');
                 _this4.fetchProjects();
             }, function (response) {
@@ -20835,7 +20839,7 @@ module.exports = function spread(callback) {
         deleteProject: function deleteProject(project) {
             var _this5 = this;
 
-            axios.delete('/api/projects/' + project.id).then(function (response) {
+            axios.delete('/api/' + this.userslug + '/projects/' + project.id).then(function (response) {
                 var index = _this5.projects.indexOf(project);
                 _this5.projects.splice(index, 1);
                 _this5.fetchProjects();
@@ -20856,7 +20860,7 @@ module.exports = function spread(callback) {
         }
     } // end methods
 };
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
 /* 32 */
@@ -20871,7 +20875,7 @@ window._ = __webpack_require__(34);
  * code may be modified to fit the specific needs of your application.
  */
 
-window.$ = __webpack_provided_window_dot_jQuery = __webpack_require__(2);
+window.$ = __webpack_provided_window_dot_jQuery = __webpack_require__(1);
 
 __webpack_require__(33);
 
@@ -20907,7 +20911,7 @@ window.axios.defaults.headers.common = {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 33 */
@@ -23291,7 +23295,7 @@ if (typeof jQuery === 'undefined') {
 
 }(jQuery);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 34 */
@@ -40651,8 +40655,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       on: {
         "update-user": _vm.fetchProjects
       }
-    }, [_c('td', [_vm._v(_vm._s(project.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(project.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(project.description))]), _vm._v(" "), _c('td', [_c('button', {
+    }, [_c('td', [_vm._v(_vm._s(project.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(project.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(project.description))]), _vm._v(" "), _c('td', [_c('a', {
       staticClass: "btn btn-info",
+      attrs: {
+        "href": '/' + _vm.userslug + '/' + project.slug
+      }
+    }, [_vm._v("\n                  View\n                ")]), _vm._v(" "), _c('button', {
+      staticClass: "btn btn-warning",
       attrs: {
         "type": "button"
       },

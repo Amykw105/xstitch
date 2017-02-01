@@ -17,5 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
  Route::get('/{user}/info', 'api\ProfilesController@getInfo');
- Route::get('/{user}/projects_list', 'api\ProfilesController@getProjects');
- Route::resource('/projects', 'api\ProjectsController');
+
+
+Route::resource('/{user}/projects', 'api\ProjectsController');
+Route::get('/{user}/projects/{project}', 'api\ProjectsController@projectInfo');
