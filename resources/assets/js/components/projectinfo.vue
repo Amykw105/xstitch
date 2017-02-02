@@ -8,10 +8,19 @@
             <h4 class="modal-title">Add a new status</h4>
           </div>
           <div class="modal-body">
-            <form v-on:submit.prevent="createStatus" method="post">
+            <form v-on:submit.prevent="createStatus" method="post" enctype="multipart/form-data">
+              <div style="display:none" class="Image-input__image-wrapper">
+            <i v-show="! imageSrc" class="icon fa fa-picture-o"></i>
+            <img v-show="imageSrc" class="Image-input__image" :src="imageSrc">
+        </div>
+
+        <div class="Image-input__input-wrapper">
+            Choose
+            <input @change="previewThumbnail" class="Image-input__input" name="thumbnail" type="file">
+        </div>
                 <div v-bind:class="{'form-group': true, 'has-error': errors.description}">
                     <label>Status Description:</label>
-                    <input type="text" v-model="newStatus.description" class="form-control">
+                    <input type="text" class="form-control" v-model="newStatus.description">
                     <span class="help-block" v-for="error in errors.description">{{ error }}</span>
                 </div>
                 <div class="form-group">
@@ -89,7 +98,8 @@ export default {
     props: {
       userslug: '',
       projectslug: '',
-      projectid: ''
+      projectid: '',
+
     },
     data(){
         return {
@@ -98,8 +108,9 @@ export default {
             newStatus:{
               project_id: this.projectid,
               description: '',
-              image: 'google.com',
+              image: '',
             },
+            imageSrc: '',
             editStatus:{
               id: '',
               description: '',
@@ -114,11 +125,28 @@ export default {
         fetchStatuses(){ // Get all statuses for the listing
           axios.get('/api/' + this.userslug + '/' + this.projectslug + '/statuses').then(response => {
               this.statuses = response.data.data;
+              this.statuses.reverse();
           });
         },
-        createStatus(){
-          axios.post('/api/' + this.userslug + '/' + this.projectslug + '/statuses', this.newStatus).then(response => {
-              console.log(response.data);
+        previewThumbnail: function(event) {
+            var input = event.target;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                var vm = this;
+                reader.onload = function(e) {
+                    vm.imageSrc = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+            this.newStatus.image = input.files[0];
+        },
+        createStatus(e){
+          var formData = new FormData(e.target);
+          formData.append('image', this.newStatus.image);
+          formData.append('description', this.newStatus.description);
+          formData.append('project_id', this.newStatus.project_id);
+          formData.append('userslug', this.userslug);
+          axios.post('/api/' + this.userslug + '/' + this.projectslug + '/statuses', formData).then(response => {
               this.fetchStatuses();
           }, response => {
               this.formErrors = response.data;

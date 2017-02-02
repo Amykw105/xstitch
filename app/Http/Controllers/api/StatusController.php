@@ -10,6 +10,8 @@ use App\Status;
 use App\Http\Requests;
 use Validator;
 use Response;
+use Carbon\Carbon;
+use File;
 use Illuminate\Support\Facades\Input;
 class StatusController extends Controller
 {
@@ -37,9 +39,21 @@ class StatusController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-      $create = Status::create($request->all());
-
-      return response()->json($create);
+      $status = new Status;
+      $status->description = $request->description;
+      $status->project_id = $request->project_id;
+      if($request->hasFile('image')) {
+          $file = Input::file('image');
+          //getting timestamp
+          $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
+          $name = str_replace([' ', ':'], '-',$timestamp. '-' .$file->getClientOriginalName());
+          $project_id = $request->project_id;
+          $userslug = $request->userslug;
+          $status->image = '/images/projects/'.$userslug.'/'.$project_id.'/'.$name;
+          $file->move(public_path().'/images/projects/'.$userslug.'/'.$project_id, $name);
+          $status->save();
+      }
+      return response()->json($request);
     }
 
     /**
