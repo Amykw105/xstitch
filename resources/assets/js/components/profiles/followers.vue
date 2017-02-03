@@ -5,7 +5,7 @@
             <tbody>
                 <tr v-for="follower in followers" v-bind:user="follower"
                     v-on:update-user="fetchFollowers">
-                <td><a :href=follower.slug>{{follower.name}}</a></td>
+                <td><a :href="follower.slug">{{follower.name}}</a></td>
               </tr>
             </tbody>
         </table>
@@ -14,7 +14,7 @@
             <tbody>
                 <tr v-for="followee in followees" v-bind:user="followee"
                     v-on:update-user="fetchFollowees">
-                <td><a :href=followee.slug>{{followee.name}}</a></td>
+                <td><a href="/" :href="followee.slug">{{followee.name}}</a></td>
               </tr>
             </tbody>
         </table>
@@ -46,6 +46,7 @@ export default {
         fetchFollowees(){ // Get all Followers
           axios.get('/api/' + this.userslug + '/following').then(response => {
               this.followees = response.data.followees;
+
           });
         },
     } // end methods

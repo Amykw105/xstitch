@@ -42430,8 +42430,10 @@ if (false) {
     props: {
         userslug: '',
         projectslug: '',
-        projectid: ''
-
+        projectid: '',
+        permissions: {
+            default: false
+        }
     },
     data: function data() {
         return {
@@ -42731,14 +42733,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('span', {
       staticClass: "help-block"
     }, [_vm._v(_vm._s(error))])
-  })], 2), _vm._v(" "), _vm._m(3)])])])])]), _vm._v(" "), _c('button', {
+  })], 2), _vm._v(" "), _vm._m(3)])])])])]), _vm._v(" "), (_vm.permissions == 'true') ? _c('button', {
     staticClass: "btn btn-primary",
     attrs: {
       "type": "button",
       "data-toggle": "modal",
       "data-target": "#newStatusModal"
     }
-  }, [_vm._v("New Status")]), _vm._v(" "), _c('table', {
+  }, [_vm._v("New Status")]) : _vm._e(), _vm._v(" "), _c('table', {
     staticClass: "table table-striped"
   }, [_vm._m(4), _vm._v(" "), _c('tbody', _vm._l((_vm.statuses), function(status) {
     return _c('tr', {
@@ -42760,7 +42762,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "color": "black"
       }
-    }, [_vm._v(_vm._s(status.created_at))]), _vm._v(" "), _c('td', [_c('button', {
+    }, [_vm._v(_vm._s(status.created_at))]), _vm._v(" "), _c('td', [(_vm.permissions == 'true') ? _c('button', {
       staticClass: "btn btn-warning",
       attrs: {
         "type": "button"
@@ -42770,7 +42772,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.fetchStatus(status)
         }
       }
-    }, [_vm._v("\n                  Edit\n                ")]), _vm._v(" "), _c('button', {
+    }, [_vm._v("\n                  Edit\n                ")]) : _vm._e(), _vm._v(" "), (_vm.permissions == 'true') ? _c('button', {
       staticClass: "btn btn-danger",
       attrs: {
         "type": "button"
@@ -42780,7 +42782,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deleteStatus(status)
         }
       }
-    }, [_vm._v("\n                  Delete\n                ")])])])
+    }, [_vm._v("\n                  Delete\n                ")]) : _vm._e()])])
   }))])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
@@ -43001,6 +43003,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_c('td', [_c('a', {
       attrs: {
+        "href": "/",
         "href": followee.slug
       }
     }, [_vm._v(_vm._s(followee.name))])])])

@@ -59,7 +59,7 @@
   </div><!-- /. New Status modal -->
 
 
-    <button type="button" data-toggle="modal" data-target="#newStatusModal" class="btn btn-primary">New Status</button>
+    <button  v-if="permissions == 'true'" type="button" data-toggle="modal" data-target="#newStatusModal" class="btn btn-primary">New Status</button>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -80,10 +80,10 @@
 
                 <td>
 
-                  <button type="button" class="btn btn-warning" v-on:click="fetchStatus(status)">
+                  <button  v-if="permissions == 'true'" type="button" class="btn btn-warning" v-on:click="fetchStatus(status)">
                     Edit
                   </button>
-                  <button type="button" class="btn btn-danger" v-on:click="deleteStatus(status)">
+                  <button  v-if="permissions == 'true'" type="button" class="btn btn-danger" v-on:click="deleteStatus(status)">
                     Delete
                   </button>
                 </td>
@@ -99,7 +99,9 @@ export default {
       userslug: '',
       projectslug: '',
       projectid: '',
-
+      permissions: {
+        default: false
+      }
     },
     data(){
         return {
