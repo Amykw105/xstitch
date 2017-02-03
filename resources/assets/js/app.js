@@ -18,14 +18,18 @@ Vue.use(require('vue-resource'));
  */
 // axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-import projects from './components/projects.vue';
-import projectinfo from './components/projectinfo.vue';
+import projects from './components/projects/projects.vue';
+import projectinfo from './components/projects/projectinfo.vue';
+import followers from './components/profiles/followers.vue';
+import userinfo from './components/profiles/userinfo.vue';
 
 const app = new Vue({
     el: '#app',
 
     components: {
       projects,
-      projectinfo
+      projectinfo,
+      followers,
+      userinfo
     }
 });

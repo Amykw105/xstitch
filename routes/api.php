@@ -16,9 +16,13 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
- Route::get('/{user}/info', 'api\ProfilesController@getInfo');
 
+// Profiles and users
+Route::get('/{user}/info', 'api\ProfilesController@getInfo');
+Route::get('/{user}/followers', 'api\ProfilesController@getFollowers');
+Route::get('/{user}/following', 'api\ProfilesController@getFollowees');
 
+// Projects and Statuses
 Route::resource('/{user}/projects', 'api\ProjectsController');
 Route::get('/{user}/projects/{project}', 'api\ProjectsController@projectInfo');
 Route::resource('/{user}/{project}/statuses', 'api\StatusController');

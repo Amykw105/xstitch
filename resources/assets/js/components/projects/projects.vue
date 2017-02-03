@@ -64,8 +64,8 @@
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /. Update Project modal -->
-
-    <button type="button" data-toggle="modal" data-target="#newProjectModal" class="btn btn-primary">New Project</button>
+  <h3>Projects</h3>
+    <button type="button" data-toggle="modal" data-target="#newProjectModal" class="btn btn-primary pull-right">New Project</button>
         <table class="table table-striped">
             <thead>
                 <tr>
