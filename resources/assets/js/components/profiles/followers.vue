@@ -25,7 +25,7 @@
 export default {
     props: {
       userslug: '',
-        userid: ''
+        userid: '',
     },
     data(){
         return {

@@ -65,7 +65,7 @@
     </div><!-- /.modal-dialog -->
   </div><!-- /. Update Project modal -->
   <h3>Projects</h3>
-    <button type="button" data-toggle="modal" data-target="#newProjectModal" class="btn btn-primary pull-right">New Project</button>
+    <button type="button" data-toggle="modal" data-target="#newProjectModal" v-if="permissions == 'true'" class="btn btn-primary pull-right">New Project</button>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -87,10 +87,10 @@
                   <a :href="'/' + userslug + '/' + project.slug" class="btn btn-info">
                     View
                   </a>
-                  <button type="button" class="btn btn-warning" v-on:click="fetchProject(project)">
+                  <button v-if="permissions == 'true'" type="button" class="btn btn-warning" v-on:click="fetchProject(project)">
                     Edit
                   </button>
-                  <button type="button" class="btn btn-danger" v-on:click="deleteProject(project)">
+                  <button v-if="permissions == 'true'" type="button" class="btn btn-danger" v-on:click="deleteProject(project)">
                     Delete
                   </button>
                 </td>
@@ -107,7 +107,10 @@ export default {
             type: String,
             default: "",
         },
-        userid: ''
+        userid: '',
+        permissions: {
+          default: false
+        }
     },
     data(){
         return {
