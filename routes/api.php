@@ -27,5 +27,6 @@ Route::resource('/{user}/projects', 'api\ProjectsController');
 Route::get('/{user}/projects/{project}', 'api\ProjectsController@projectInfo');
 Route::resource('/{user}/{project}/statuses', 'api\StatusController');
 
+// Feeds
 Route::get('/{user}/my-feed', 'api\FeedController@myFeed');
-Route::get('/{user}/my-feed', 'api\FeedController@followingFeed');
+Route::get('/{user}/following-feed', 'api\FeedController@followingFeed');

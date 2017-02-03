@@ -38,9 +38,10 @@ class FeedController extends Controller
       $updates = DB::table('statuses')
               ->select('statuses.*')
               ->join('projects', 'statuses.project_id', '=', 'projects.id')
-              ->where('projects.user_id', $getUser['id'])
+              ->join('followers', 'projects.id', '=', 'followers.followee_id')
+              ->where('followers.follower_id', $getUser['id'])
               ->orderby('statuses.created_at', 'desc')->limit(6)->get();
-      // select s.* from statuses s inner join projects p on p.id = s.project_id and p.user_id = 11 order by s.created_at Desc;
+      // select s.* from statuses s inner join projects p on p.id = s.project_id inner join followers f on p.id = f.followee_id where f.follower_id = 11;
 
       return response()->json([
           'updates'=>$updates,
