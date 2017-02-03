@@ -26,3 +26,6 @@ Route::get('/{user}/following', 'api\ProfilesController@getFollowees');
 Route::resource('/{user}/projects', 'api\ProjectsController');
 Route::get('/{user}/projects/{project}', 'api\ProjectsController@projectInfo');
 Route::resource('/{user}/{project}/statuses', 'api\StatusController');
+
+Route::get('/{user}/my-feed', 'api\FeedController@myFeed');
+Route::get('/{user}/my-feed', 'api\FeedController@followingFeed');

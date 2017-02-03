@@ -22,6 +22,7 @@ import projects from './components/projects/projects.vue';
 import projectinfo from './components/projects/projectinfo.vue';
 import followers from './components/profiles/followers.vue';
 import userinfo from './components/profiles/userinfo.vue';
+import statusfeed from './components/feeds/statusfeed.vue';
 
 const app = new Vue({
     el: '#app',
@@ -30,6 +31,7 @@ const app = new Vue({
       projects,
       projectinfo,
       followers,
-      userinfo
+      userinfo,
+      statusfeed
     }
 });

@@ -16,6 +16,14 @@
                       ></projects>
                 </div>
             </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Latest Activity</div>
+
+                <div class="panel-body">
+                    <statusfeed userid="{{ $user->id }}" userslug="{{ $user->slug }}"></statusfeed>
+                </div>
+            </div>
         </div>
 
 @endsection
