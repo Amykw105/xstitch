@@ -15,12 +15,17 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+
+
 });
 
 // Profiles and users
 Route::get('/{user}/info', 'api\ProfilesController@getInfo');
 Route::get('/{user}/followers', 'api\ProfilesController@getFollowers');
 Route::get('/{user}/following', 'api\ProfilesController@getFollowees');
+Route::get('/{cuser}/follow/{ouser}', 'api\FollowingController@index');
+Route::post('/{cuser}/follow/{ouser}', 'api\FollowingController@store');
+Route::delete('/{cuser}/follow/{ouser}', 'api\FollowingController@destroy');
 
 // Projects and Statuses
 Route::resource('/{user}/projects', 'api\ProjectsController');

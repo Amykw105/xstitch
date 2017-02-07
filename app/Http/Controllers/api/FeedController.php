@@ -47,27 +47,5 @@ class FeedController extends Controller
           'updates'=>$updates,
       ]);
     }
-    public function getProjects($user){
-      $getUser = User::where('slug', $user)->first();
-      $projects = $getUser->project()->get()->toArray();
-      return response()->json([
-          'projects'=>$projects
-      ]);
-    }
-    // Who are my followers
-    public function getFollowers($user){
-      $getUser = User::where('slug', $user)->first();
-      $followers = $getUser->followers()->get()->toArray();
-      return response()->json([
-          'followers'=>$followers
-      ]);
-    }
-    // Who am I following
-    public function getFollowees($user){
-      $getUser = User::where('slug', $user)->first();
-      $followees = $getUser->followings()->get()->toArray();
-      return response()->json([
-          'followees'=>$followees
-      ]);
-    }
+
 }
