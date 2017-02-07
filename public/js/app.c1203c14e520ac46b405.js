@@ -19768,10 +19768,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_profiles_followers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_profiles_followers_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_profiles_userinfo_vue__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_profiles_userinfo_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_profiles_userinfo_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_profiles_useractions_vue__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_profiles_useractions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_profiles_useractions_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_feeds_statusfeed_vue__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_feeds_statusfeed_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_feeds_statusfeed_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_feeds_statusfeed_vue__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_feeds_statusfeed_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_feeds_statusfeed_vue__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -19798,7 +19796,6 @@ Vue.use(__webpack_require__(52));
 
 
 
-
 var app = new Vue({
   el: '#app',
 
@@ -19807,8 +19804,7 @@ var app = new Vue({
     projectinfo: __WEBPACK_IMPORTED_MODULE_1__components_projects_projectinfo_vue___default.a,
     followers: __WEBPACK_IMPORTED_MODULE_2__components_profiles_followers_vue___default.a,
     userinfo: __WEBPACK_IMPORTED_MODULE_3__components_profiles_userinfo_vue___default.a,
-    statusfeed: __WEBPACK_IMPORTED_MODULE_5__components_feeds_statusfeed_vue___default.a,
-    useractions: __WEBPACK_IMPORTED_MODULE_4__components_profiles_useractions_vue___default.a
+    statusfeed: __WEBPACK_IMPORTED_MODULE_4__components_feeds_statusfeed_vue___default.a
   }
 });
 
@@ -20735,52 +20731,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
-/* harmony default export */ __webpack_exports__["default"] = {
-    props: {
-        userslug: '',
-        userid: ''
-    },
-    data: function data() {
-        return {
-            followers: [],
-            followees: []
-        };
-    },
-    created: function created() {
-        this.fetchFollowers();
-        this.fetchFollowees();
-    },
-
-    methods: {
-        fetchFollowers: function fetchFollowers() {
-            var _this = this;
-
-            // Get all Followers
-            axios.get('/api/' + this.userslug + '/followers').then(function (response) {
-                _this.followers = response.data.followers;
-            });
-        },
-        fetchFollowees: function fetchFollowees() {
-            var _this2 = this;
-
-            // Get all Followers
-            axios.get('/api/' + this.userslug + '/following').then(function (response) {
-                _this2.followees = response.data.followees;
-            });
-        }
-    } // end methods
-};
-
-/***/ }),
-/* 33 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
 //
 //
 //
@@ -20803,11 +20753,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             newFollow: {
                 followee: this.userid,
                 follower: this.currentid
-            }
+            },
+            followers: [],
+            followees: []
         };
     },
     created: function created() {
         this.fetchAction();
+        this.fetchFollowers();
+        this.fetchFollowees();
     },
 
     methods: {
@@ -20823,6 +20777,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post('/api/' + this.currentslug + '/follow/' + this.userslug, this.newFollow).then(function (response) {
                 _this2.fetchAction();
+                _this2.fetchFollowers();
             }, function (response) {
                 console.log = response.data;
             });
@@ -20832,12 +20787,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.delete('/api/' + this.currentslug + '/follow/' + this.userslug).then(function (response) {
                 _this3.fetchAction();
+                _this3.fetchFollowers();
+            });
+        },
+        fetchFollowers: function fetchFollowers() {
+            var _this4 = this;
+
+            // Get all Followers
+            axios.get('/api/' + this.userslug + '/followers').then(function (response) {
+                _this4.followers = response.data.followers;
+            });
+        },
+        fetchFollowees: function fetchFollowees() {
+            var _this5 = this;
+
+            // Get all Followers
+            axios.get('/api/' + this.userslug + '/following').then(function (response) {
+                _this5.followees = response.data.followees;
             });
         }
     } // end methods
 };
 
 /***/ }),
+/* 33 */,
 /* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -40939,52 +40912,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __vue_exports__, __vue_options__
-var __vue_styles__ = {}
-
-/* script */
-__vue_exports__ = __webpack_require__(33)
-
-/* template */
-var __vue_template__ = __webpack_require__(46)
-__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-if (
-  typeof __vue_exports__.default === "object" ||
-  typeof __vue_exports__.default === "function"
-) {
-if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-__vue_options__ = __vue_exports__ = __vue_exports__.default
-}
-if (typeof __vue_options__ === "function") {
-  __vue_options__ = __vue_options__.options
-}
-__vue_options__.__file = "/Users/premiermac3/Code/xstitch/resources/assets/js/components/profiles/useractions.vue"
-if(typeof __vue_options__.name === "undefined") {
-  __vue_options__.name = "useractions"
-}__vue_options__.render = __vue_template__.render
-__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-111d7311", __vue_options__)
-  } else {
-    hotAPI.reload("data-v-111d7311", __vue_options__)
-  }
-})()}
-if (__vue_options__.functional && typeof __vue_template__ !== "undefined") {console.error("[vue-loader] useractions.vue: functional components are not supported with templates, they should use render functions.")}
-
-module.exports = __vue_exports__
-
-
-/***/ }),
+/* 42 */,
 /* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41123,7 +41051,8 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 46 */
+/* 46 */,
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -41147,22 +41076,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.follow()
       }
     }
-  }, [_vm._v("\n      Follow\n    ")])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-111d7311", module.exports)
-  }
-}
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('h3', [_vm._v("Followers")]), _vm._v(" "), _c('table', {
+  }, [_vm._v("\n      Follow\n    ")]), _vm._v(" "), _c('h3', [_vm._v("Followers")]), _vm._v(" "), _c('table', {
     staticClass: "table table-striped"
   }, [_c('tbody', _vm._l((_vm.followers), function(follower) {
     return _c('tr', {
@@ -41174,6 +41088,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_c('td', [_c('a', {
       attrs: {
+        "href": "/",
         "href": follower.slug
       }
     }, [_vm._v(_vm._s(follower.name))])])])
