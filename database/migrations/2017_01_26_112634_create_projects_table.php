@@ -20,6 +20,7 @@ class CreateProjectsTable extends Migration
           $table->string('description');
           $table->string('source');
           $table->string('slug');
+          $table->string('type');
           $table->timestamps();
       });
     }

@@ -25,6 +25,18 @@
                     <input type="text" v-model="newProject.source" class="form-control">
                     <span class="help-block" v-for="error in errors.source">{{ error }}</span>
                 </div>
+                <div v-bind:class="{'form-group': true, 'has-error': errors.source}">
+                    <label>Project Type:</label>
+
+                    <select v-model="newProject.type" class="form-control">
+                      <option value="cross-stitch">Cross-Stitch</option>
+                      <option value="embroidery">Embroidery</option>
+                      <option value="painting">Painting</option>
+                      <option value="drawing">Drawing</option>
+                      <option value="other">Other</option>
+                    </select>
+                    <span class="help-block" v-for="error in errors.type">{{ error }}</span>
+                </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Create New Project</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -70,6 +82,7 @@
             <thead>
                 <tr>
                   <th>id</th>
+                  <th>Type</th>
                   <th>Projectname</th>
                   <th>Description</th>
                   <th></th>
@@ -81,6 +94,7 @@
                     v-on:update-user="fetchProjects"
                 >
                 <td>{{project.id}}</td>
+                <td>{{project.type}}</td>
                 <td>{{project.name}}</td>
                 <td>{{project.description}}</td>
                 <td>
@@ -122,6 +136,7 @@ export default {
               description: '',
               source: '',
               slug: '',
+              type: ''
             },
             editProject:{
               id: '',
@@ -129,7 +144,8 @@ export default {
               description: '',
               source: '',
               name: '',
-              slug: ''
+              slug: '',
+              type: ''
             }
         }
     },
@@ -155,6 +171,7 @@ export default {
             this.editProject.id = response.data.id;
             this.editProject.name = response.data.name;
             this.editProject.slug = response.data.slug;
+            this.editProject.type = response.data.type;
             this.editProject.owner_id = response.data.owner_id;
             $("#updateProjectModal").modal("show");
           }, response => {
