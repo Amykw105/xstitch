@@ -41070,7 +41070,7 @@ module.exports = __vue_exports__
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [(_vm.status) ? _c('button', {
+  return _c('div', [(_vm.status === true) ? _c('button', {
     staticClass: "btn btn-warning",
     attrs: {
       "type": "button"
@@ -41080,17 +41080,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.unfollow()
       }
     }
-  }, [_vm._v("\n      Unfollow\n    ")]) : _c('button', {
+  }, [_vm._v("\n      Unfollow\n    ")]) : _vm._e(), _vm._v(" "), (_vm.status === false) ? _c('button', {
     staticClass: "btn btn-primary",
-    attrs: {
-      "type": "button"
-    },
     on: {
       "click": function($event) {
         _vm.follow()
       }
     }
-  }, [_vm._v("\n      Follow\n    ")]), _vm._v(" "), _c('h3', [_vm._v("Followers")]), _vm._v(" "), _c('table', {
+  }, [_vm._v("\n      Follow\n    ")]) : _vm._e(), _vm._v(" "), _c('h3', [_vm._v("Followers")]), _vm._v(" "), _c('table', {
     staticClass: "table table-striped"
   }, [_c('tbody', _vm._l((_vm.followers), function(follower) {
     return _c('tr', {

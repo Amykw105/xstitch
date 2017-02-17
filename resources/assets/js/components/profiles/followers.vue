@@ -1,9 +1,9 @@
 <template lang="html">
     <div>
-        <button  v-if="status" type="button" class="btn btn-warning" v-on:click="unfollow()">
+        <button v-if="status === true" type="button" class="btn btn-warning" v-on:click="unfollow()">
           Unfollow
         </button>
-        <button  v-else type="button" class="btn btn-primary" v-on:click="follow()">
+        <button  v-if="status === false"  class="btn btn-primary" v-on:click="follow()">
           Follow
         </button>
 
