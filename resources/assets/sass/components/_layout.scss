@@ -1,0 +1,17 @@
+//*********************//
+ layouts
+//*********************//
+
+.content_wrapper{
+  @include make-row;
+}
+
+.main_content{
+  @include make-xs-column(12);
+  @include make-md-column(8);
+
+}
+.side_content{
+  @include make-xs-column(12);
+  @include make-md-column(4);
+}

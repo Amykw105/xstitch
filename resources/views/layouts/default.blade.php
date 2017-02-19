@@ -82,7 +82,7 @@
             </div>
         </nav>
         <div class="container">
-          <div class="row">
+          <div class="content_wrapper">
             @section('sidebar')
                 @include('components.sidebar')
             @show

@@ -60,36 +60,24 @@
 
 
     <button  v-if="permissions == 'true'" type="button" data-toggle="modal" data-target="#newStatusModal" class="btn btn-primary">New Status</button>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                  <th>image</th>
-                  <th>Description</th>
-                  <th>Posted</th>
-                  <th>Actions</th>
-                </tr>
-            </thead>
 
-            <tbody>
-                <tr v-for="status in statuses" v-bind:user="status"
-                    v-on:update-user="fetchStatuses"
-                >
-                <td style="color: black">{{status.image}}</td>
-                <td style="color: black">{{status.description}}</td>
-                <td style="color: black">{{status.created_at}}</td>
+    <div class="status_grid">
+        <div class="status_block" v-for="status in statuses" 
+            v-on:update-user="fetchStatuses">
+            <div class="status_image">
+              <img :alt="status.description" :src="status.image" />
+            </div>
+            <span class="status_info">{{status.description}}<br/>{{status.created_at}}</span>
+            <button  v-if="permissions == 'true'" type="button" class="btn btn-warning" v-on:click="fetchStatus(status)">
+              Edit
+            </button>
+            <button  v-if="permissions == 'true'" type="button" class="btn btn-danger" v-on:click="deleteStatus(status)">
+              Delete
+            </button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
 
-                <td>
-
-                  <button  v-if="permissions == 'true'" type="button" class="btn btn-warning" v-on:click="fetchStatus(status)">
-                    Edit
-                  </button>
-                  <button  v-if="permissions == 'true'" type="button" class="btn btn-danger" v-on:click="deleteStatus(status)">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-        </table>
     </div>
 </template>
 

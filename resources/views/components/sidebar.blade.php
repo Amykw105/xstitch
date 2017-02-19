@@ -1,5 +1,5 @@
 
-        <div class="col-md-4">
+        <div class="side_content">
           <div class="panel panel-default">
               <div class="panel-body">
                   <userinfo userid="{{ $user->id }}" userslug="{{ $user->slug }}"></userinfo>

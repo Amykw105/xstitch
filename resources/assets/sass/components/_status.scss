@@ -1,0 +1,29 @@
+//*********************//
+ statuses
+//*********************//
+
+.status_grid{
+  @include make-row;
+}
+.status_block{
+  @include make-xs-column(12);
+  @include make-sm-column(6);
+  @include make-md-column(4);
+  @include make-lg-column(3);
+  margin-bottom: 15px;
+}
+.status_image{
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: hidden;
+
+  img{
+    max-width: 100%;
+    width: 100%;
+    transform: rotate(90deg);
+  }
+}
+.status_info{
+  display: none;
+}
