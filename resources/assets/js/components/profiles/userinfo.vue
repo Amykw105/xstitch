@@ -1,9 +1,13 @@
 <template lang="html">
-    <div>
-      <h3>{{username}}</h3>
-      {{avatar}}<br/>
-      {{location}}<br/>
-      {{about}}
+    <div class="container">
+      <div class="profile-image-block">
+        <img :src="avatar" :alt="username" class="profile-picture"/>
+      </div>
+      <div class="profile-info-block">
+        <p class="profile-name">{{username}}</p>
+        <p class="profile-location">{{location}}</p>
+        <p class="profile-about">{{about}}</p>
+      </div>
     </div>
 </template>
 

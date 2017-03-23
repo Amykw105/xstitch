@@ -1,14 +1,15 @@
 <template lang="html">
-    <div>
-        <table class="table table-striped">
-            <tbody>
-                <tr v-for="status in statuses">
-                  <td>{{status.description}}</td>
-                <td>{{status.image}}</td>
-                  <td>{{status.created_at}}</td>
-              </tr>
-            </tbody>
-        </table>
+    <div class="status-section">
+      <div class="status_grid">
+          <div class="status_block" v-for="status in statuses"
+              v-on:update-user="fetchStatuses">
+              <div class="status_image">
+                <img :alt="status.description" :src="status.image" />
+              </div>
+              <span class="status_info">{{status.description}}<br/>{{status.created_at}}</span>
+          </div>
+          <div class="clearfix"></div>
+        </div>
     </div>
 </template>
 

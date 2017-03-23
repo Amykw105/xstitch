@@ -7,25 +7,25 @@
           Follow
         </button>
 
-
-    <h3>Followers</h3>
-      <table class="table table-striped">
-          <tbody>
-              <tr v-for="follower in followers" v-bind:user="follower"
+        <div class="follow-block">
+          <p class="follow-title">{{ followers.length }} Followers</p>
+          <ul class="list-group followers-list">
+            <li class="list-group-item" v-for="follower in followers" v-bind:user="follower"
                   v-on:update-user="fetchFollowers">
-              <td><a href="/" :href="follower.slug">{{follower.name}}</a></td>
-            </tr>
-          </tbody>
-      </table>
-      <h3>Following</h3>
-      <table class="table table-striped">
-          <tbody>
-              <tr v-for="followee in followees" v-bind:user="followee"
+                <a href="/" :href="follower.slug">{{follower.name}}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="follow-block">
+          <p class="follow-title">{{ followees.length }} Following</p>
+          <ul class="list-group followers-list">
+            <li class="list-group-item" v-for="followee in followees" v-bind:user="followee"
                   v-on:update-user="fetchFollowees">
-              <td><a href="/" :href="followee.slug">{{followee.name}}</a></td>
-            </tr>
-          </tbody>
-      </table>
+                <a href="/" :href="followee.slug">{{followee.name}}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="clearfix"></div>
       </div>
 </template>
 

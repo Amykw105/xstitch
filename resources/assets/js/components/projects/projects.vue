@@ -1,5 +1,5 @@
 <template lang="html">
-    <div>
+    <div class="project-section">
       <div class="modal fade" tabindex="-1" role="dialog" id="newProjectModal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -31,9 +31,9 @@
                     <select v-model="newProject.type" class="form-control">
                       <option value="cross-stitch">Cross-Stitch</option>
                       <option value="embroidery">Embroidery</option>
-                      <option value="painting">Painting</option>
+                      <!-- <option value="painting">Painting</option>
                       <option value="drawing">Drawing</option>
-                      <option value="other">Other</option>
+                      <option value="other">Other</option> -->
                     </select>
                     <span class="help-block" v-for="error in errors.type">{{ error }}</span>
                 </div>
@@ -76,41 +76,34 @@
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /. Update Project modal -->
-  <h3>Projects</h3>
-    <button type="button" data-toggle="modal" data-target="#newProjectModal" v-if="permissions == 'true'" class="btn btn-primary pull-right">New Project</button>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                  <th>id</th>
-                  <th>Type</th>
-                  <th>Projectname</th>
-                  <th>Description</th>
-                  <th></th>
-                </tr>
-            </thead>
 
-            <tbody>
-                <tr v-for="project in projects" v-bind:user="project"
-                    v-on:update-user="fetchProjects"
-                >
-                <td>{{project.id}}</td>
-                <td>{{project.type}}</td>
-                <td>{{project.name}}</td>
-                <td>{{project.description}}</td>
-                <td>
-                  <a :href="'/' + userslug + '/' + project.slug" class="btn btn-info">
-                    View
-                  </a>
-                  <button v-if="permissions == 'true'" type="button" class="btn btn-warning" v-on:click="fetchProject(project)">
-                    Edit
-                  </button>
-                  <button v-if="permissions == 'true'" type="button" class="btn btn-danger" v-on:click="deleteProject(project)">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-        </table>
+  <div class="section-title">
+    <p class="text-title">Projects</p>
+    <button type="button" data-toggle="modal" data-target="#newProjectModal" v-if="permissions == 'true'" class="btn btn-primary">New Project</button>
+    <div class="clearfix"></div>
+  </div>
+    <div class="project_grid">
+
+      <ul class="project_listing" v-for="project in projects" v-on:update-user="fetchProjects">
+
+         <li class="project-listing-item">
+             <a :href="'/' + userslug + '/' + project.slug">
+                {{project.name}}
+             </a>
+             <span class="project-actions">
+                <button v-if="permissions == 'true'" type="button" class="btn btn-warning" v-on:click="fetchProject(project)">Edit</button>
+                <button v-if="permissions == 'true'" type="button" class="btn btn-danger" v-on:click="deleteProject(project)">Delete</button>
+                <span v-if="permissions == 'false'" class="badge">{{project.type}}</span>
+             </span>
+             <div class="clearfix"></div>
+          </li>
+
+    </ul>
+
+    </div>
+
+
+
     </div>
 </template>
 

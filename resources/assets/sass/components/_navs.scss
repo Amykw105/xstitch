@@ -1,0 +1,37 @@
+//*********************//
+// navs
+//*********************//
+
+.fixed-footer-nav{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  background-color: gray;
+
+  @media screen and (min-width: $tablet){
+    position: fixed;
+    top: 50px;
+    bottom: initial;
+  }
+}
+.action-nav{
+
+    ul{
+
+    }
+    li{
+      display: inline-block;
+      width: 33.33%;
+      margin: 0;
+      padding: 10px;
+      text-align: center;
+      float: left;
+      cursor: pointer;
+    }
+}
+
+.header-nav{
+
+}

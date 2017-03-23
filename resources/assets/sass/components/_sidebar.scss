@@ -1,0 +1,45 @@
+//*********************//
+// sidebar
+//*********************//
+
+.followers-list{
+  display: none;
+
+  @media screen and (min-width: $desktop){
+    display: block;
+  }
+}
+.follow-block{
+  float: left;
+  width: 50%;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px 0 0;
+
+  @media screen and (min-width: $desktop){
+    display: block;
+    width: 100%;
+  }
+}
+.profile{
+  margin-bottom: 20px;
+  border: solid 1px;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: lightgray;
+}
+.profile-image-block{
+  text-align: center;
+  @include make-xs-column(4);
+}
+.profile-info-block{
+  @include make-xs-column(8);
+}
+
+.user-details{
+  display: block;
+}
+.follow-details{
+  display: block;
+}

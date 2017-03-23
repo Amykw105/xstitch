@@ -1,25 +1,29 @@
 //*********************//
-// statuses
+// projects
 //*********************//
 
-.status-section{
+.project-section{
   border: solid 1px;
   border-radius: 4px;
   background-color: lightgray;
   padding: 10px;
   margin-bottom: 20px;
 }
-.status_grid{
-  @include make-row;
+.project_grid{
 }
-.status_block{
-  @include make-xs-column(6);
-  @include make-sm-column(4);
-  @include make-md-column(3);
-  @include make-lg-column(3);
-  margin-bottom: 15px;
+.project_listing{
+
 }
-.status_image{
+.project-listing-item{
+  display: block;
+  border-bottom: solid 1px;
+  padding-top: 10px;
+
+  .project-actions{
+    float:right;
+  }
+}
+.project_image{
   width: 100%;
   height: 100%;
   display: block;
@@ -31,6 +35,6 @@
     transform: rotate(90deg);
   }
 }
-.status_info{
+.projects_info{
   display: none;
 }

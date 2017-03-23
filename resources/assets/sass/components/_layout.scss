@@ -2,16 +2,42 @@
  layouts
 //*********************//
 
+*{
+    box-sizing: border-box;
+}
+
+html, body {
+    background-color: white;
+    color: #1a1a1a;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+    height: 100vh;
+    margin: 0;
+}
+
 .content_wrapper{
   @include make-row;
 }
 
 .main_content{
   @include make-xs-column(12);
-  @include make-md-column(8);
-
+  float: none;
+  @media screen and (min-width: $tablet){
+    @include make-md-column(8);
+  }
 }
 .side_content{
   @include make-xs-column(12);
-  @include make-md-column(4);
+  float: none;
+  @media screen and (min-width: $tablet){
+    @include make-md-column(4);
+  }
+}
+
+.main-wrapper{
+  margin-top: 70px;
+
+  @media screen and (min-width: $tablet){
+    margin-top: 110px;
+  }
 }

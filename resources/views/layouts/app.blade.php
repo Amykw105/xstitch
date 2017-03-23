@@ -60,7 +60,7 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                   <li>
-                                    <a href="{{ url('/my-projects') }}">My Projects</a>
+                                    <a href="/{{ Auth::user()->slug }}">My Projects</a>
                                   </li>
                                     <li>
                                         <a href="{{ url('/logout') }}"
